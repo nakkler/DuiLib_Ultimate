@@ -2102,7 +2102,7 @@ namespace DuiLib {
 			if(LPCTSTR key = m_SharedResInfo.m_ImageHash.GetAt(i)) {
 				data = static_cast<TImageInfo*>(m_SharedResInfo.m_ImageHash.Find(key, false));
 				if (data) {
-					CRenderEngine::FreeImage(data);
+					CImageCore::FreeImage(data);
 					data = NULL;
 				}
 			}
@@ -3258,11 +3258,11 @@ namespace DuiLib {
 				LPTSTR pstr = NULL;
 				int iIndex = _tcstol(bitmap, &pstr, 10);
 				
-				data = bGdiplus ? CRenderEngine::GdiplusLoadImage(iIndex, type, mask, instance) : CRenderEngine::LoadImage(iIndex, type, mask, instance);
+				data = bGdiplus ?	CImageCore::GdiplusLoadImage(iIndex, type, mask, instance) : CImageCore::LoadImage(iIndex, type, mask, instance);
 			}
 		}
 		else {
-			data = bGdiplus ? CRenderEngine::GdiplusLoadImage(bitmap, NULL, mask, instance) : CRenderEngine::LoadImage(bitmap, NULL, mask, instance);
+			data = bGdiplus ? CImageCore::GdiplusLoadImage(bitmap, NULL, mask, instance) : CImageCore::LoadImage(bitmap, NULL, mask, instance);
 			if(!data) {
 				CDuiString sImageName = bitmap;
 				int iAtIdx = sImageName.ReverseFind(_T('@'));
@@ -3270,7 +3270,7 @@ namespace DuiLib {
 				if(iAtIdx != -1 && iDotIdx != -1) {
 					CDuiString sExe = sImageName.Mid(iDotIdx);
 					sImageName = sImageName.Left(iAtIdx) + sExe;
-					data = bGdiplus ? CRenderEngine::GdiplusLoadImage(sImageName.GetData(), NULL, mask, instance) : CRenderEngine::LoadImage(sImageName.GetData(), NULL, mask, instance);
+					data = bGdiplus ? CImageCore::GdiplusLoadImage(sImageName.GetData(), NULL, mask, instance) : CImageCore::LoadImage(sImageName.GetData(), NULL, mask, instance);
 				}
 			}
 
@@ -3295,12 +3295,12 @@ namespace DuiLib {
 				TImageInfo* pOldImageInfo = static_cast<TImageInfo*>(m_SharedResInfo.m_ImageHash.Find(bitmap));
 				if (pOldImageInfo)
 				{
-					CRenderEngine::FreeImage(pOldImageInfo);
+					CImageCore::FreeImage(pOldImageInfo);
 					m_SharedResInfo.m_ImageHash.Remove(bitmap);
 				}
 
 				if( !m_SharedResInfo.m_ImageHash.Insert(bitmap, data) ) {
-					CRenderEngine::FreeImage(data);
+					CImageCore::FreeImage(data);
 					data = NULL;
 				}
 			}
@@ -3309,12 +3309,12 @@ namespace DuiLib {
 				TImageInfo* pOldImageInfo = static_cast<TImageInfo*>(m_ResInfo.m_ImageHash.Find(bitmap));
 				if (pOldImageInfo)
 				{
-					CRenderEngine::FreeImage(pOldImageInfo);
+					CImageCore::FreeImage(pOldImageInfo);
 					m_ResInfo.m_ImageHash.Remove(bitmap);
 				}
 
 				if( !m_ResInfo.m_ImageHash.Insert(bitmap, data) ) {
-					CRenderEngine::FreeImage(data);
+					CImageCore::FreeImage(data);
 					data = NULL;
 				}
 			}
@@ -3344,14 +3344,14 @@ namespace DuiLib {
 		if (bShared || m_bForceUseSharedRes)
 		{
 			if( !m_SharedResInfo.m_ImageHash.Insert(bitmap, data) ) {
-				CRenderEngine::FreeImage(data);
+				CImageCore::FreeImage(data);
 				data = NULL;
 			}
 		}
 		else
 		{
 			if( !m_ResInfo.m_ImageHash.Insert(bitmap, data) ) {
-				CRenderEngine::FreeImage(data);
+				CImageCore::FreeImage(data);
 				data = NULL;
 			}
 		}
@@ -3367,7 +3367,7 @@ namespace DuiLib {
 			data = static_cast<TImageInfo*>(m_SharedResInfo.m_ImageHash.Find(bitmap));
 			if (data)
 			{
-				CRenderEngine::FreeImage(data) ;
+				CImageCore::FreeImage(data) ;
 				m_SharedResInfo.m_ImageHash.Remove(bitmap);
 			}
 		}
@@ -3376,7 +3376,7 @@ namespace DuiLib {
 			data = static_cast<TImageInfo*>(m_ResInfo.m_ImageHash.Find(bitmap));
 			if (data)
 			{
-				CRenderEngine::FreeImage(data) ;
+				CImageCore::FreeImage(data) ;
 				m_ResInfo.m_ImageHash.Remove(bitmap);
 			}
 		}
@@ -3391,7 +3391,7 @@ namespace DuiLib {
 				if(LPCTSTR key = m_SharedResInfo.m_ImageHash.GetAt(i)) {
 					data = static_cast<TImageInfo*>(m_SharedResInfo.m_ImageHash.Find(key, false));
 					if (data) {
-						CRenderEngine::FreeImage(data);
+						CImageCore::FreeImage(data);
 					}
 				}
 			}
@@ -3404,7 +3404,7 @@ namespace DuiLib {
 				if(LPCTSTR key = m_ResInfo.m_ImageHash.GetAt(i)) {
 					data = static_cast<TImageInfo*>(m_ResInfo.m_ImageHash.Find(key, false));
 					if (data) {
-						CRenderEngine::FreeImage(data);
+						CImageCore::FreeImage(data);
 					}
 				}
 			}
@@ -3458,15 +3458,15 @@ namespace DuiLib {
 						if( isdigit(*bitmap) ) {
 							LPTSTR pstr = NULL;
 							int iIndex = _tcstol(bitmap, &pstr, 10);
-							pNewData = CRenderEngine::LoadImage(iIndex, data->sResType.GetData(), data->dwMask);
+							pNewData = CImageCore::LoadImage(iIndex, data->sResType.GetData(), data->dwMask);
 						}
 					}
 					else {
-						pNewData = CRenderEngine::LoadImage(bitmap, NULL, data->dwMask);
+						pNewData = CImageCore::LoadImage(bitmap, NULL, data->dwMask);
 					}
 					if( pNewData == NULL ) continue;
 
-					CRenderEngine::FreeImage(data, false);
+					CImageCore::FreeImage(data, false);
 					data->hBitmap = pNewData->hBitmap;
 					data->pImage = pNewData->pImage;
 					data->pBits = pNewData->pBits;
@@ -3501,14 +3501,14 @@ namespace DuiLib {
 						if( isdigit(*bitmap) ) {
 							LPTSTR pstr = NULL;
 							int iIndex = _tcstol(bitmap, &pstr, 10);
-							pNewData = CRenderEngine::LoadImage(iIndex, data->sResType.GetData(), data->dwMask);
+							pNewData = CImageCore::LoadImage(iIndex, data->sResType.GetData(), data->dwMask);
 						}
 					}
 					else {
-						pNewData = CRenderEngine::LoadImage(bitmap, NULL, data->dwMask);
+						pNewData = CImageCore::LoadImage(bitmap, NULL, data->dwMask);
 					}
 
-					CRenderEngine::FreeImage(data, false);
+					CImageCore::FreeImage(data, false);
 					if( pNewData == NULL ) {
 						m_ResInfo.m_ImageHash.Remove(bitmap);
 						continue;

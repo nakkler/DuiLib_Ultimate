@@ -65,6 +65,7 @@
 #include "Core/UIContainer.h"
 
 #include "Core/UIDlgBuilder.h"
+#include "Core/UIImageCore.h"
 #include "Core/UIRender.h"
 #include "Utils/WinImplBase.h"
 

@@ -160,7 +160,7 @@ namespace DuiLib
 
 	void CGifAnimUI::InitGifImage()
 	{
-		TImageInfo* pImageInfo = CRenderEngine::GdiplusLoadImage(GetBkImage());
+		TImageInfo* pImageInfo = CImageCore::GdiplusLoadImage(GetBkImage());
 		if(pImageInfo == NULL) return;
 
 		m_pGifImage = pImageInfo->pImage;

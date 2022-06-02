@@ -948,6 +948,8 @@
     <ClCompile Include="Control\UIMenu.cpp" />
     <ClCompile Include="Control\UIRing.cpp" />
     <ClCompile Include="Core\ControlFactory.cpp" />
+    <ClCompile Include="Core\Render\win\UIImageWin.cpp" />
+    <ClCompile Include="Core\UIImageCore.cpp" />
     <ClCompile Include="Core\UIResourceManager.cpp" />
     <ClCompile Include="Layout\UIAnimationTabLayout.cpp" />
     <ClCompile Include="StdAfx.cpp">
@@ -1039,7 +1041,9 @@
     <ClInclude Include="Control\UIListEx.h" />
     <ClInclude Include="Control\UIMenu.h" />
     <ClInclude Include="Control\UIRing.h" />
-    <ClInclude Include="Core\ControlFactory.h" />
+    <ClInclude Include="Core\Render\UIImageBase.h" />
+    <ClInclude Include="Core\Render\win\UIImageWin.h" />
+    <ClInclude Include="Core\UIImageCore.h" />
     <ClInclude Include="Core\UIResourceManager.h" />
     <ClInclude Include="Layout\UIAnimationTabLayout.h" />
     <ClInclude Include="StdAfx.h" />

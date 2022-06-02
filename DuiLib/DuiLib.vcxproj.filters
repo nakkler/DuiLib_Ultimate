@@ -33,6 +33,18 @@
     <Filter Include="Header Files\Control">
       <UniqueIdentifier>{77af9153-b795-4ed6-bcab-50a6b1c6741c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Core\Render">
+      <UniqueIdentifier>{de63cef8-8cd7-47b8-a0c5-ca6a4c623c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Render">
+      <UniqueIdentifier>{8dcc2ced-1090-43d4-b3e4-b93f1b721d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Render\win">
+      <UniqueIdentifier>{2dde4dfd-24c6-4f06-9d77-201afd82b5eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Render\win">
+      <UniqueIdentifier>{611b689d-a2f5-4405-9000-1d1d4b7322f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StdAfx.cpp">
@@ -203,6 +215,12 @@
     <ClCompile Include="Control\UILoading.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
+    <ClCompile Include="Core\UIImageCore.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Render\win\UIImageWin.cpp">
+      <Filter>Source Files\Core\Render\win</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -346,9 +364,6 @@
     <ClInclude Include="Utils\DragDropImpl.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Core\ControlFactory.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Control\UIGroupBox.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
@@ -393,6 +408,15 @@
     </ClInclude>
     <ClInclude Include="Control\UILoading.h">
       <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\UIImageCore.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Render\win\UIImageWin.h">
+      <Filter>Header Files\Core\Render\win</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Render\UIImageBase.h">
+      <Filter>Header Files\Core\Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

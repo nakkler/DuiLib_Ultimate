@@ -78,7 +78,7 @@ namespace DuiLib
 
 	void CRingUI::InitImage()
 	{
-		TImageInfo* pImageInfo = CRenderEngine::GdiplusLoadImage(GetBkImage());
+		TImageInfo* pImageInfo = CImageCore::GdiplusLoadImage(GetBkImage());
 		if(pImageInfo == NULL) return;
 
 		m_pBkimage = pImageInfo->pImage;
