@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "UILoading.h"
-#include <functional>
 #include <Gdiplus.h>
 
 using namespace DuiLib;
@@ -51,23 +50,33 @@ double* GetSpokesAngles(int _intNumberSpoke)
 IMPLEMENT_DUICONTROL(CLoadingUI)
 
 CLoadingUI::CLoadingUI()
+<<<<<<< HEAD
 	: m_pTrdAni(NULL)
 	, m_bExit(false)
 	, m_bStop(false)
+=======
+	: m_bStop(true)
+>>>>>>> master
 	, m_nTime(100)
 	, m_nNumber(0)
 	, m_Angles(nullptr)
 	, m_Colors(nullptr)
 	, m_NumberOfSpoke(10)
 	, m_SpokeThickness(4)
+<<<<<<< HEAD
 	, m_OuterCircleRadius(10)
 	, m_InnerCircleRadius(8)
+=======
+	, m_OuterCircleRadius( 10)
+	, m_InnerCircleRadius (8)
+>>>>>>> master
 {
 	m_condQueue = ::CreateEvent(0,0,0,0);
 }
 
 CLoadingUI::~CLoadingUI()
 {
+<<<<<<< HEAD
 	if (m_pTrdAni)
 	{
 		m_bStop = true;
@@ -82,6 +91,9 @@ CLoadingUI::~CLoadingUI()
 		CloseHandle(m_condQueue);
 		m_condQueue = nullptr;
 	}
+=======
+	Stop();
+>>>>>>> master
 
     if(m_Angles) delete m_Angles;
     if(m_Colors) delete m_Colors;
@@ -215,17 +227,24 @@ DWORD WINAPI CLoadingUI::_ThreadFun(LPVOID p)
 
 void CLoadingUI::Start()
 {
-	if (m_nTime > 0 && m_pTrdAni == NULL)
+	if (m_nTime > 0 && m_pManager && m_bStop == true)
 	{
+<<<<<<< HEAD
 		m_pTrdAni = CreateThread(0,0,&CLoadingUI::_ThreadFun,this,0,0);
 	}
 	m_bStop = false;
 	SetEvent(m_condQueue);
+=======
+		m_pManager->SetTimer(this, kTimerLoadingId, m_nTime);
+	}
+	m_bStop = false;
+>>>>>>> master
 }
 
 void CLoadingUI::Stop()
 {
 	m_bStop = true;
+<<<<<<< HEAD
 }
 
 void CLoadingUI::ThreadAni()
@@ -244,6 +263,11 @@ void CLoadingUI::ThreadAni()
 		m_ProgressValue = ++m_ProgressValue % m_NumberOfSpoke;
 		Invalidate();
 		Sleep(m_nTime);
+=======
+	if (m_pManager)
+	{
+		m_pManager->KillTimer(this, kTimerLoadingId);
+>>>>>>> master
 	}
 
 	SetEvent(m_condQueue);
@@ -251,10 +275,24 @@ void CLoadingUI::ThreadAni()
 
 void CLoadingUI::Init()
 {
+	CControlUI::Init();
 	m_Angles = GetSpokesAngles(m_NumberOfSpoke);
-	m_Colors = GenerateColorsPallet(m_Color, !m_bStop, m_NumberOfSpoke);
+	m_Colors = GenerateColorsPallet(m_Color, true, m_NumberOfSpoke);
+	Start();
 }
 
+void DuiLib::CLoadingUI::DoEvent(TEventUI& event)
+{
+    if (event.Type == UIEVENT_TIMER && event.wParam == kTimerLoadingId)
+    {
+        m_ProgressValue = ++m_ProgressValue % m_NumberOfSpoke;
+        Invalidate();
+    }
+    else
+    {
+        CControlUI::DoEvent(event);
+    }
+}
 
 CControlUI* CreateLoadingControl(LPCTSTR pstrType)
 {

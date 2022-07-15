@@ -16,6 +16,10 @@ class UILIB_API CLoadingUI : public CControlUI
 {
     DECLARE_DUICONTROL(CControlUI)
 
+	enum TIMEID
+	{
+		kTimerLoadingId = 100,
+	};
 public:
 	CLoadingUI();
 	virtual ~CLoadingUI();
@@ -24,12 +28,12 @@ public:
 	LPVOID GetInterface(LPCTSTR pstrName);
 
 	virtual void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
-	virtual void PaintBkImage(HDC hDC);
 	void Start();
 	void Stop();
 protected:
+    virtual void PaintBkImage(HDC hDC);
+    virtual void DoEvent(TEventUI& event);
 	virtual void Init();
-	void ThreadAni();
 	Gdiplus::Color* GenerateColorsPallet(Gdiplus::Color _objColor, bool _blnShadeColor, int _intNbSpoke);
 
 	static DWORD WINAPI _ThreadFun(LPVOID p);
@@ -37,8 +41,11 @@ protected:
 	int                 m_nNumber;
 	int                 m_nTime;
 	bool				m_bStop;
+<<<<<<< HEAD
 	bool				m_bExit;
 	HANDLE				m_pTrdAni;
+=======
+>>>>>>> master
 
 	int m_NumberOfSpoke;//辐条数量
 	int m_SpokeThickness;//辐条粗细
@@ -49,8 +56,11 @@ protected:
 	Gdiplus::Color m_Color;
 	Gdiplus::Color* m_Colors;
 	double* m_Angles;
+<<<<<<< HEAD
 
 	HANDLE m_condQueue;//事件通知
+=======
+>>>>>>> master
 };
 
 CControlUI* CreateLoadingControl(LPCTSTR pstrType);
