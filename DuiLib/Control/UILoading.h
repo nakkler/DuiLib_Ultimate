@@ -36,16 +36,10 @@ protected:
 	virtual void Init();
 	Gdiplus::Color* GenerateColorsPallet(Gdiplus::Color _objColor, bool _blnShadeColor, int _intNbSpoke);
 
-	static DWORD WINAPI _ThreadFun(LPVOID p);
 protected:
 	int                 m_nNumber;
 	int                 m_nTime;
 	bool				m_bStop;
-<<<<<<< HEAD
-	bool				m_bExit;
-	HANDLE				m_pTrdAni;
-=======
->>>>>>> master
 
 	int m_NumberOfSpoke;//辐条数量
 	int m_SpokeThickness;//辐条粗细
@@ -56,11 +50,6 @@ protected:
 	Gdiplus::Color m_Color;
 	Gdiplus::Color* m_Colors;
 	double* m_Angles;
-<<<<<<< HEAD
-
-	HANDLE m_condQueue;//事件通知
-=======
->>>>>>> master
 };
 
 CControlUI* CreateLoadingControl(LPCTSTR pstrType);
